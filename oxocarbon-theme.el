@@ -102,6 +102,13 @@
   (font-lock-builtin-face               (:foreground pine))
   (font-lock-function-name-face         (:foreground pink :bold t))
   (font-lock-variable-name-face         (:foreground rose))
+  ;; Emacs 29+ native treesit fontification (typescript-ts-mode,
+  ;; python-ts-mode, rust-ts-mode, etc.) uses this for object/struct
+  ;; field access -- it's unset by default and inherits
+  ;; font-lock-variable-name-face, which is wrong: oxocarbon.nvim's
+  ;; @property is base10 (Carbon Magenta 40), not @variable's base04.
+  ;; font-lock-property-use-face inherits this face by default.
+  (font-lock-property-name-face         (:foreground love))
   (font-lock-comment-face               (:foreground muted :italic t))
   (font-lock-comment-delimiter-face     (:foreground muted :italic t))
   (font-lock-doc-face                   (:foreground muted))
