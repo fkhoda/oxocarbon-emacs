@@ -375,6 +375,10 @@
   (treemacs-git-unmodified-face		   			(:foreground text))
   (treemacs-git-renamed-face		   			(:foreground text))
   (treemacs-git-modified-face		   			(:foreground rose))
+  ;; Was unset -- inherited font-lock-string-face by treemacs' own
+  ;; default (treemacs-faces.el), making untracked files the same
+  ;; purple as strings purely by coincidence. Give it its own color.
+  (treemacs-git-untracked-face					(:foreground love))
 
   ;; lets support solaire mode
   (solaire-default-face (:background base))
