@@ -112,7 +112,10 @@
   (font-lock-comment-face               (:foreground muted :italic t))
   (font-lock-comment-delimiter-face     (:foreground muted :italic t))
   (font-lock-doc-face                   (:foreground muted))
-  (font-lock-string-face                (:foreground gold :italic t))
+  ;; oxocarbon.nvim's own `String' highlight group has no italic flag
+  ;; (only `Comment' does) -- match that instead of the extra emphasis
+  ;; this fork previously added.
+  (font-lock-string-face                (:foreground gold))
   (font-lock-warning-face               (:foreground gold))
   (font-lock-constant-face              (:foreground gold :bold t))
   (font-lock-regexp-grouping-backslash  (:foreground green :weight 'semi-bold))
