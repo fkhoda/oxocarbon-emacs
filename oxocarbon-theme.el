@@ -19,34 +19,44 @@
  ((((class color) (min-colors #xFFFFFF))        ; col 1 GUI/24bit
    ((class color) (min-colors #xFF)))           ; col 2 Xterm/256
 
-  ;; Define our color palette
-  (highlight-high   "#363636" "#d7d7ff")
-  (highlight-med    "#262626" "#d7d7ff")
+  ;; Define our color palette -- letter-exact to
+  ;; github.com/nyoom-engineering/oxocarbon.nvim's base16 values (dark
+  ;; variant). base01-base05 are HSLuv blends of base00/base06 (replicated
+  ;; from oxocarbon.nvim's colorutils.lua `blend-hex'); the rest are its
+  ;; literal accent hexes. `gold', `rose', `love' and `pink' previously held
+  ;; invented, non-oxocarbon colors (closer to Rosé Pine) -- `gold' and
+  ;; `rose' now alias real oxocarbon slots so every face that used them
+  ;; automatically becomes correct; `love'/`pink' get their real hex.
+  (highlight-high   "#393939" "#d7d7ff")   ; base02
+  (highlight-med    "#262626" "#d7d7ff")   ; base01
   (highlight-low    "#21202e" "#d7d7ff")
-  (iris             "#be95ff" "#d7d7ff")
+  (blue             "#78a9ff" "#87afff")   ; base09 -- Keyword/Type/Statement/@tag
+  (blue-bright      "#33b1ff" "#5fafff")   ; base11
+  (cyan-bright      "#3ddbd9" "#5fd7d7")   ; base08 -- @punctuation.*/@keyword.operator
+  (iris             "#be95ff" "#d7d7ff")   ; base14
   (dark-iris        "#17121F" "#d7d7ff")
-  (foam             "#82cfff" "#00d7ff")
+  (foam             "#82cfff" "#00d7ff")   ; base15
   (dark-foam        "#142027" "#00d7ff")
-  (green            "#42be65" "#00d7ff")
-  (pine             "#08bdba" "#afffff")
-  (rose             "#f5e0dc" "#ffffff")
-  (gold             "#f6c177" "#ffd7af")
+  (green            "#42be65" "#00d7ff")   ; base13
+  (pine             "#08bdba" "#afffff")   ; base07 -- @constant.builtin/@namespace/DiffAdded
+  (rose             "#d0d0d0" "#d7d7ff")   ; base04 -- was #f5e0dc; @variable/Normal fg
+  (gold             "#be95ff" "#ffd7af")   ; base14 -- was #f6c177 (no gold in oxocarbon); String/@constant/Warning
   (dark-gold        "#211A10" "#ffd7af")
-  (pink             "#FF74B8" "#ffd7af")
-  (love             "#FF0065" "#ff87af")
+  (pink             "#ff7eb6" "#ffd7af")   ; base12 -- was #FF74B8; @function
+  (love             "#ee5396" "#ff87af")   ; base10 -- was #FF0065; Error/@property/DiffRemoved
   (dark-love        "#27000F" "#ff87af")
-  (text             "#FFFFFF" "#ffffff")
-  (subtle           "#dde1e6" "#ffffff")
-  (unmuted          "#bbc1c6" "#686868")
-  (muted            "#525252" "#ffffff")
+  (text             "#FFFFFF" "#ffffff")   ; base06
+  (subtle           "#d0d0d0" "#ffffff")   ; base04 -- was #dde1e6
+  (unmuted          "#f2f2f2" "#686868")   ; base05 -- was #bbc1c6
+  (muted            "#525252" "#ffffff")   ; base03
   (dark-green       "#03302F" "#F00000")
   (overlay          "#292929" "#ffffff")
-  (surface          "#161616" "#ffffff")
-  (base             "#131313" "#ffffff"))
+  (surface          "#161616" "#ffffff")   ; base00
+  (base             "#131313" "#ffffff"))  ; blend
 
  ;; Customize faces
  (
-  (default                              (:background surface :foreground text))
+  (default                              (:background surface :foreground subtle))
   (border                               (:foreground muted))
   (bookmark-face                        (:foreground love))
   (button                               (:foreground foam))
@@ -87,10 +97,10 @@
   (whitespace-trailing                  (:foreground base :background love))
 
   ;; ;; Font lock
-  (font-lock-keyword-face               (:foreground pink :weight 'semi-bold))
-  (font-lock-type-face                  (:foreground iris :weight 'semi-bold))
-  (font-lock-builtin-face               (:foreground iris))
-  (font-lock-function-name-face         (:foreground foam))
+  (font-lock-keyword-face               (:foreground blue :weight 'semi-bold))
+  (font-lock-type-face                  (:foreground blue :weight 'semi-bold))
+  (font-lock-builtin-face               (:foreground pine))
+  (font-lock-function-name-face         (:foreground pink :bold t))
   (font-lock-variable-name-face         (:foreground rose))
   (font-lock-comment-face               (:foreground muted :italic t))
   (font-lock-comment-delimiter-face     (:foreground muted :italic t))
@@ -342,14 +352,14 @@
 
 
   (diff-added (:background pine :foreground text))
-  (diff-changed (:background gold :foreground base))
+  (diff-changed (:background blue :foreground base))
   
   (treemacs-directory-collapsed-face			(:foreground muted))
   (treemacs-directory-face						(:foreground subtle))
   (treemacs-file-face							(:foreground subtle))
   (treemacs-fringe-indicator-face               (:foreground love))
 
-  (treemacs-git-added-face						(:foreground gold))
+  (treemacs-git-added-face						(:foreground pine))
   (treemacs-git-renamed-face				   	(:foreground rose))
   (treemacs-git-ignored-face				   	(:foreground muted))
   (treemacs-git-unmodified-face		   			(:foreground text))
@@ -507,7 +517,7 @@
   
   (tree-sitter-hl-face:variable.special          (:foreground iris :italic t))
   (tree-sitter-hl-face:variable.synthesized      (:foreground love :italic t))
-  (tree-sitter-hl-face:property                  (:foreground rose))
+  (tree-sitter-hl-face:property                  (:foreground love))
   (tree-sitter-hl-face:property.definition       (:inherit 'tree-sitter-hl-face:property :italic t))
 
   (tree-sitter-hl-face:comment                   (:inherit 'font-lock-comment-face))
@@ -521,13 +531,13 @@
   (tree-sitter-hl-face:operator                  (:foreground pine))
   (tree-sitter-hl-face:label                     (:foreground muted))
   (tree-sitter-hl-face:constant                  (:inherit 'font-lock-constant-face))
-  (tree-sitter-hl-face:constant.builtin          (:inherit 'font-lock-constant-face :weight 'normal))
+  (tree-sitter-hl-face:constant.builtin          (:foreground pine))
   (tree-sitter-hl-face:number                    (:foreground gold))
 
-  (tree-sitter-hl-face:punctuation               (:foreground pink :weight 'semi-bold))
-  (tree-sitter-hl-face:punctuation.bracket       (:foreground foam :weight 'semi-bold))
-  (tree-sitter-hl-face:punctuation.delimiter     (:foreground subtle :weight 'semi-bold))
-  (tree-sitter-hl-face:punctuation.special       (:foreground rose :weight 'semi-bold))
+  (tree-sitter-hl-face:punctuation               (:foreground cyan-bright :weight 'semi-bold))
+  (tree-sitter-hl-face:punctuation.bracket       (:foreground cyan-bright :weight 'semi-bold))
+  (tree-sitter-hl-face:punctuation.delimiter     (:foreground cyan-bright :weight 'semi-bold))
+  (tree-sitter-hl-face:punctuation.special       (:foreground cyan-bright :weight 'semi-bold))
 
   (tree-sitter-hl-face:case-pattern              (:foreground gold))
   (tree-sitter-hl-face:keyword.compiler          (:foreground muted :bold t :italic t))
@@ -538,8 +548,8 @@
   (tree-sitter-hl-face:repeat                    (:foreground foam))
   (tree-sitter-hl-face:boolean                   (:inherit 'font-lock-constant-face))
   (tree-sitter-hl-face:keyword.return            (:inherit 'tree-sitter-hl-face:keyword :italic t))
-  (tree-sitter-hl-face:keyword.operator          (:foreground pine :bold t))
-  (tree-sitter-hl-face:keyword.function          (:inherit 'tree-sitter-hl-face:keyword))
+  (tree-sitter-hl-face:keyword.operator          (:foreground cyan-bright :bold t))
+  (tree-sitter-hl-face:keyword.function          (:foreground cyan-bright))
   (tree-sitter-hl-face:conditional               (:inherit 'tree-sitter-hl-face:keyword :weight 'semi-bold))
 
   (swift-mode:preprocessor-keyword-face (:foreground text :italic t))
